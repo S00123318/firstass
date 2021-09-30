@@ -13,10 +13,15 @@ let books = [];
 
 app.post('/books', (req, res) => {
     const book = req.body;
+
+    const bookNumber = books.length;
+
     books.push(book);
 
-    res.send ('book has been added to the database');
-    console.log(`book name is ${book.name} number of book is ${books.length}`);
+    res.location(`/books/${bookNumber}`).status(201).json(book);
+
+   // res.send ('book has been added to the database');
+    // console.log(`book name is ${book.name} number of book is ${books.length}`);
 
 });
 
@@ -27,7 +32,7 @@ app.get('/books', (req, res) => {
 app.get('/books/:id', (req,res) => {
 
     let id = req.params.id;
-     res.json(books[id]);
+     res.json(null).status(404).json(books[id]);
  })
 
  app.delete('/books/:id',(req, res) =>
