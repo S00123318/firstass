@@ -1,9 +1,12 @@
 const express = require('express')
-const Joi = require('joi')
+const mongoose = require('mongoose');
+const Joi = require('joi');
+const { Book, validate } = require('../models/books');
+//const { Book } = require('../models/books');
 
 const router = express.Router();
 
-let books = [
+/*let books = [
 
     {
         "bookId":1,
@@ -19,15 +22,17 @@ let books = [
         "bookId": 3,
         "name": "Bad Dad",
     },
-];
+]; */ 
 
-router.post('/', (req, res) => {
 
-    const newBookId = books.length;
+
+router.post('/', async(req, res) => {
+
+  let book = new Book(req.body);
+
+  book = await book.save();
   
-    const book = { bookId: newBookId, ...req.body };
-  
-    const result = validateBook(req.body)
+    const result = validate(req.body)
   
     if (result.error)
     {
@@ -38,7 +43,7 @@ router.post('/', (req, res) => {
   
     books.push(book);
   
-    res.location(`/books/${newBookId}`)
+    res.location(`/${books}`)
       .status(201)
       .json(book);
   
@@ -114,12 +119,12 @@ router.post('/', (req, res) => {
   
   })
   
-  function validateBook(book) {
+ /*  function validateBook(book) {
     const schema = Joi.object({
       name: Joi.string().min(3).required(),
       quantity: Joi.number().integer().min(0)
     })
     return schema.validate(book);
-  }
+  } */
 
 module.exports = router
