@@ -6,25 +6,6 @@ const { Book, validate } = require('../models/books');
 
 const router = express.Router();
 
-/*let books = [
-
-    {
-        "bookId":1,
-        "name": "Gansta Granny",
-        "quantity": 3
-    },
-    {
-        "bookId": 2,
-        "name": "The Boy in the Dress",
-        "quantity":2
-    },
-    {
-        "bookId": 3,
-        "name": "Bad Dad",
-    },
-]; */ 
-
-
 
 router.post('/', async(req, res) => {
 
