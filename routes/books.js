@@ -52,7 +52,8 @@ router.post('/', async(req, res) => {
   
   });
   
-  router.get('/', (req, res) => {
+  router.get('/', async(req, res) => {
+    const books = await Book.find();
     res.json(books);
   })
   
@@ -120,6 +121,7 @@ router.post('/', async(req, res) => {
   })
   
  /*  function validateBook(book) {
+    const schema = Joi.object({
     const schema = Joi.object({
       name: Joi.string().min(3).required(),
       quantity: Joi.number().integer().min(0)
