@@ -3,7 +3,7 @@ const express = require('express')
 
 const books = require('./routes/books');
 const home = require('./routes/home');
-//const books = require('./models/books');
+
 const app = express()
 const port = 3000
 const mongoose = require('mongoose');
@@ -34,9 +34,5 @@ app.use('/books/',books)
 
 
 app.use('/', home )
-
-
-
-
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

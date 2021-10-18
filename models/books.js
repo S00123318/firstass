@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-const router = require('../routes/home');
-//const { Book, validate } = require('../models/books');
 
 const bookSchema = new mongoose.Schema({
     name: String,
@@ -22,4 +20,3 @@ function validateBook(book) {
   exports.Book = Book;
 exports.validate = validateBook;
 
-/* module.exports = router */
