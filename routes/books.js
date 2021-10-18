@@ -35,13 +35,32 @@ router.post('/', async(req, res) => {
   });
   
   router.get('/', async(req, res) => {
-    try{
-    const books = await Book.find();
-    res.json(books);
+    /*try{
+      const books = await Book.find();
+      res.json(books);
+      }
+      catch{
+        res.status(500),json('db error')
+      }*/
+      
+     const  {title, year, limit} = req.query;
+      let filter = {};
+  
+    if (title) {
+      filter.title = title
     }
-    catch{
-      res.status(500),json('db error')
+
+    const yearNumber = parseInt(year)
+
+    if(!isNaN(yearNumber)){
+      filter.year_written = yearNumber
     }
+  
+    const books = await Book.
+      find(filter);
+      
+   
+    
   })
   
   
