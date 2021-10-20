@@ -1,8 +1,10 @@
 const Joi = require('joi')
 const express = require('express')
 
+
 const books = require('./routes/books');
 const home = require('./routes/home');
+const users = require('./routes/users');
 
 const app = express()
 const port = 3000
@@ -34,5 +36,7 @@ app.use('/books/',books)
 
 
 app.use('/', home )
+
+app.use('/users',users)
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

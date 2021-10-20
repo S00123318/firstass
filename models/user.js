@@ -20,5 +20,5 @@ function validateUser(user) {
     return schema.validate(user);
 }
 
-exports.Book = Book;
-exports.validate = validateBook;
+exports.User = User;
+exports.validate = validateUser;

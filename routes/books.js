@@ -77,9 +77,9 @@ router.post('/', async(req, res) => {
     const books = await Book.
     find(filter).
     limit(pageSizeNumber)
-    sort({price : 1, year_written : -1}).
-    skip((pageNumberNumber -1)*pageSizeNumber).
-    select('price year_written')
+    //sort({price : 1, year_written : -1}).
+    //skip((pageNumberNumber -1)*pageSizeNumber).
+    //select('price year_written')
       res.json(books);
     
    
