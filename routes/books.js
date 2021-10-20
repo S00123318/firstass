@@ -36,7 +36,7 @@ router.post('/', async(req, res) => {
   
   router.get('/', async(req, res) => {
     
-  const { title, year_written, year, limit } = req.query;
+  const { title, year_written, year, limit, pagenumber, pagesize } = req.query;
 
   let filter = {};
 
@@ -55,15 +55,32 @@ router.post('/', async(req, res) => {
 
   let limitNumber = parseInt(limit)
   if (isNaN(limitNumber)) {
+    Number.isInteger(limit)
     limitNumber = 0
+  }
 
+  let pageSizeNumber = parseInt(pagesize);
+
+  if (isNaN(pageSizeNumber)) {
+    Number.isInteger(pagesize)
+    pageSizeNumber = 0
+  }
+  let pageNumberNumber = parseInt(pagenumber);
+
+  if (isNaN(pageNumberNumber)) {
+    Number.isInteger(pagenumber)
+    pageNumberNumber = 1
   }
 
 
-  const books = await Book.
-    find(filter);
-    limit(limitNumber);
+  console.table(filter);
 
+  const books = await Book.
+  find(filter).
+  limit(pageSizeNumber)
+  sort({price : 1, year_written : -1}).
+  skip((pageNumberNumber -1)*pageSizeNumber).
+  select('price year_written')
     res.json(books);
   })
   
