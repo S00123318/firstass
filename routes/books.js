@@ -46,10 +46,23 @@ router.post('/', async(req, res) => {
   }
 
 
+  const yearNumber = parseInt(year)
+
+  if (!isNaN(yearNumber)) {
+    Number.isInteger(year)
+    filter.year_written = yearNumber
+  }
+
+  let limitNumber = parseInt(limit)
+  if (isNaN(limitNumber)) {
+    limitNumber = 0
+
+  }
 
 
   const books = await Book.
     find(filter);
+    limit(limitNumber);
 
     res.json(books);
   })
