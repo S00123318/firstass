@@ -35,13 +35,23 @@ router.post('/', async(req, res) => {
   });
   
   router.get('/', async(req, res) => {
-    try{
-    const books = await Book.find();
+    
+  const { title, year_written, year, limit } = req.query;
+
+  let filter = {};
+
+  if (title) {
+    filter.title = { $regex: `${title}`, $options: 'i' }
+    filter.title = title
+  }
+
+
+
+
+  const books = await Book.
+    find(filter);
+
     res.json(books);
-    }
-    catch{
-      res.status(500),json('db error')
-    }
   })
   
   
