@@ -4,6 +4,8 @@ const Joi = require('joi');
 const { Book, validate } = require('../models/books');
 const e = require('express');
 
+const validationMiddleware = require('../middleware/jwtvalidation');
+
 
 const router = express.Router();
 
@@ -87,7 +89,7 @@ router.post('/', async(req, res) => {
   })
   
   
-  router.get('/:id', async (req, res) => {
+  router.get('/:id', validationMiddleware.validJWTNeeded,  async (req, res) => {
   
     try{
     const book = await Book.findById(req.params.id);

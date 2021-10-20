@@ -5,6 +5,7 @@ const express = require('express')
 const books = require('./routes/books');
 const home = require('./routes/home');
 const users = require('./routes/users');
+const auth = require('./routes/auth')
 
 const app = express()
 const port = 3000
@@ -34,9 +35,9 @@ app.use(express.urlencoded({extended: false})); //Parse URL-encoded bodies
 
 app.use('/books/',books)
 
-
 app.use('/', home )
 
-app.use('/users',users)
+app.use('/users', users)
+app.use('/auth', auth)
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
